@@ -1,16 +1,16 @@
-.questionset-results h2 {
+.QuestionSetPapiJo-results h2 {
   font-size: 1.2em;
   font-weight: bold;
   padding-bottom: 0.5em;
 }
 
-.questionset, .intro-page, .questionset-results {
+.QuestionSetPapiJo, .intro-page, .QuestionSetPapiJo-results {
   overflow: hidden;
 }
-.questionset.hidden {
+.QuestionSetPapiJo.hidden {
   display: none;
 }
-.questionset, .intro-page, .questionset-results {
+.QuestionSetPapiJo, .intro-page, .QuestionSetPapiJo-results {
   position: relative;
 }
 .h5p-multichoice > .h5p-question {
@@ -126,7 +126,7 @@
   float: none;
 }
 
-.questionset-results button.h5p-button.qs-retrybutton:before {
+.QuestionSetPapiJo-results button.h5p-button.qs-retrybutton:before {
   font-family: 'H5PFontAwesome4';
   padding-right: 0.5em;
   content: "\f01e";
@@ -134,7 +134,7 @@
 
 /* Need to disable max-height animation stuff, since this will
    make resizing of iframe in Safari not work! */
-.questionset .h5p-question-buttons.h5p-question-visible {
+.QuestionSetPapiJo .h5p-question-buttons.h5p-question-visible {
   transition: none;
 }
 
@@ -181,7 +181,7 @@
   content: "\f00c";
 }
 
-.questionset-results button.h5p-button.qs-solutionbutton:before {
+.QuestionSetPapiJo-results button.h5p-button.qs-solutionbutton:before {
   font-family: 'H5PFontAwesome4';
   padding-right: 0.5em;
   content: "\f06e";
@@ -205,63 +205,63 @@
   line-height: 1.5em;
 }
 
-.questionset-results {
+.QuestionSetPapiJo-results {
   text-align: center;
   background: rgba(255, 255, 255, 0.9);
   filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#E6FFFFFF,endColorstr=#E6FFFFFF);
 }
 
-.questionset-results .feedback-section {
+.QuestionSetPapiJo-results .feedback-section {
   margin: 0.75em;
 }
 
-.questionset-results .greeting {
+.QuestionSetPapiJo-results .greeting {
   margin-top: 1em;
   color: #777;
   font-size: 1.25em;
 }
 
-.questionset-results .buttons {
+.QuestionSetPapiJo-results .buttons {
   margin: 2em 0 1em 0;
 }
 
-.questionset-results .result-header,
-.questionset-results .result-text,
-.questionset-results .feedback-section .feedback-text {
+.QuestionSetPapiJo-results .result-header,
+.QuestionSetPapiJo-results .result-text,
+.QuestionSetPapiJo-results .feedback-section .feedback-text {
   color: #1a73d9;
   font-weight: bold;
 }
 
-.questionset-results .result-header {
+.QuestionSetPapiJo-results .result-header {
   font-size: 2em;
   margin: 1em 0.5em 0.5em 0.5em;
 }
 
-.questionset-results .result-text,
-.questionset-results .feedback-section .feedback-text {
+.QuestionSetPapiJo-results .result-text,
+.QuestionSetPapiJo-results .feedback-section .feedback-text {
   font-size: 1.25em;
   line-height: 1.25em;
   margin: 1em;
 }
 
 /* No margin for questions when no frame */
-.h5p-no-frame .questionset .h5p-question > * {
+.h5p-no-frame .QuestionSetPapiJo .h5p-question > * {
   margin-left: 0;
   margin-right: 0;
 }
 
-.h5p-no-frame .questionset-results .feedback-section,
-.h5p-no-frame .questionset .h5p-question > *:first-child {
+.h5p-no-frame .QuestionSetPapiJo-results .feedback-section,
+.h5p-no-frame .QuestionSetPapiJo .h5p-question > *:first-child {
   margin-top: 0;
 }
 
-.h5p-no-frame .questionset-results .buttons,
-.h5p-no-frame .questionset .h5p-question > *:last-child {
+.h5p-no-frame .QuestionSetPapiJo-results .buttons,
+.h5p-no-frame .QuestionSetPapiJo .h5p-question > *:last-child {
   margin-bottom: 0;
 }
 
 /* Hide the fullscreen button rendered by H5P.DragQuestion */
-.questionset .h5p-question.h5p-dragquestion .h5p-my-fullscreen-button-enter,
-.questionset .h5p-question.h5p-dragquestion .h5p-my-fullscreen-button-exit {
+.QuestionSetPapiJo .h5p-question.h5p-dragquestion .h5p-my-fullscreen-button-enter,
+.QuestionSetPapiJo .h5p-question.h5p-dragquestion .h5p-my-fullscreen-button-exit {
   display: none;
 }
