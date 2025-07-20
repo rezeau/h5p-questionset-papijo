@@ -11,9 +11,9 @@ H5P = H5P || {};
  * @param {Object} contentData
  * @returns {H5P.QuestionSet} Instance
  */
-H5P.QuestionSet = function (options, contentId, contentData) {
-  if (!(this instanceof H5P.QuestionSet)) {
-    return new H5P.QuestionSet(options, contentId, contentData);
+H5P.QuestionSetPapiJo = function (options, contentId, contentData) {
+  if (!(this instanceof H5P.QuestionSetPapiJo)) {
+    return new H5P.QuestionSetPapiJo(options, contentId, contentData);
   }
   H5P.EventDispatcher.call(this);
   var $ = H5P.jQuery;
@@ -44,7 +44,7 @@ H5P.QuestionSet = function (options, contentId, contentData) {
       answeredText: 'Answered',
       currentQuestionText: 'Current question',
       navigationLabel: 'Questions',
-      questionSetInstruction: 'Choose question to display'
+      QuestionSetPapiJoInstruction: 'Choose question to display'
     },
     endGame: {
       showResultPage: true,
@@ -296,9 +296,9 @@ H5P.QuestionSet = function (options, contentId, contentData) {
     'aria-live': 'polite',
   });
 
-  // Create html for questionset
+  // Create html for QuestionSetPapiJo
   self.$questionsContainer = $('<div>', {
-    class: 'questionset ' + 
+    class: 'QuestionSetPapiJo ' + 
     ((params.introPage.showIntroPage && params.noOfQuestionAnswered === 0) ? 'hidden' : ''),
   });
 
@@ -331,7 +331,7 @@ H5P.QuestionSet = function (options, contentId, contentData) {
     self.$dotsContainer = $('<ul>', {
       class: 'dots-container',
       role: 'tablist',
-      'aria-label': params.texts.questionSetInstruction,
+      'aria-label': params.texts.QuestionSetPapiJoInstruction,
       appendTo: self.$progressBar
     });
 
@@ -615,7 +615,7 @@ H5P.QuestionSet = function (options, contentId, contentData) {
     }
     else {
       // Show first question
-      $('.questionset', $myDom).show();
+      $('.QuestionSetPapiJo', $myDom).show();
       _showQuestion(params.initialQuestion);
 
       if (moveFocus) {
@@ -727,12 +727,12 @@ H5P.QuestionSet = function (options, contentId, contentData) {
   var _displayEndGame = function () {
     $('.progress-dot.current', $myDom).removeClass('current');
     if (rendered) {
-      $myDom.children().hide().filter('.questionset-results').show();
+      $myDom.children().hide().filter('.QuestionSetPapiJo-results').show();
       self.trigger('resize');
       return;
     }
     //Remove old score screen.
-    $myDom.children().hide().filter('.questionset-results').remove();
+    $myDom.children().hide().filter('.QuestionSetPapiJo-results').remove();
     rendered = true;
 
     // Get total score.
@@ -772,7 +772,7 @@ H5P.QuestionSet = function (options, contentId, contentData) {
 
       // Create html for end screen
       self.$resultPage = $('<div>', {
-        'class': 'questionset-results'
+        'class': 'QuestionSetPapiJo-results'
       });
     
       $('<div>', {
@@ -834,7 +834,7 @@ H5P.QuestionSet = function (options, contentId, contentData) {
       if (params.endGame.showResultPage) {
         hookUpButton('.qs-solutionbutton', function () {
           showSolutions();
-          $myDom.children().hide().filter('.questionset').show();
+          $myDom.children().hide().filter('.QuestionSetPapiJo').show();
           _showQuestion(params.initialQuestion);
         });
         hookUpButton('.qs-retrybutton', function () {
@@ -1020,12 +1020,12 @@ H5P.QuestionSet = function (options, contentId, contentData) {
     initializeQuestion();
 
     // Allow other libraries to add transitions after the questions have been inited
-    $('.questionset', $myDom).addClass('started');
+    $('.QuestionSetPapiJo', $myDom).addClass('started');
 
     $('.qs-startbutton', $myDom)
       .click(function () {
         $(this).parents('.intro-page').hide();
-        $('.questionset', $myDom).show();
+        $('.QuestionSetPapiJo', $myDom).show();
         _showQuestion(params.initialQuestion);
         event.preventDefault();
       })
@@ -1034,7 +1034,7 @@ H5P.QuestionSet = function (options, contentId, contentData) {
           case 13: // Enter
           case 32: // Space
             $(this).parents('.intro-page').hide();
-            $('.questionset', $myDom).show();
+            $('.QuestionSetPapiJo', $myDom).show();
             _showQuestion(params.initialQuestion);
             event.preventDefault();
         }
@@ -1105,7 +1105,7 @@ H5P.QuestionSet = function (options, contentId, contentData) {
     return this;
   };
 
-  // Get current score for questionset.
+  // Get current score for QuestionSetPapiJo.
   this.getScore = function () {
     var score = 0;
     for (var i = questionInstances.length - 1; i >= 0; i--) {
@@ -1114,7 +1114,7 @@ H5P.QuestionSet = function (options, contentId, contentData) {
     return score;
   };
 
-  // Get total score possible for questionset.
+  // Get total score possible for QuestionSetPapiJo.
   this.getMaxScore = function () {
     var score = 0;
     for (var i = questionInstances.length - 1; i >= 0; i--) {
@@ -1328,5 +1328,5 @@ H5P.QuestionSet = function (options, contentId, contentData) {
   };
 };
 
-H5P.QuestionSet.prototype = Object.create(H5P.EventDispatcher.prototype);
-H5P.QuestionSet.prototype.constructor = H5P.QuestionSet;
+H5P.QuestionSetPapiJo.prototype = Object.create(H5P.EventDispatcher.prototype);
+H5P.QuestionSetPapiJo.prototype.constructor = H5P.QuestionSetPapiJo;
