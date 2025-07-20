@@ -1,6 +1,37 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 225">
-  <defs>
-    <style>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   viewBox="0 0 400 225"
+   version="1.1"
+   id="svg90"
+   sodipodi:docname="icon.svg"
+   inkscape:version="1.2.2 (732a01da63, 2022-12-09)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview92"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     showgrid="false"
+     inkscape:zoom="2.0977778"
+     inkscape:cx="379.21081"
+     inkscape:cy="205.45551"
+     inkscape:window-width="1920"
+     inkscape:window-height="1129"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="question_set_copy" />
+  <defs
+     id="defs4">
+    <style
+       id="style2">
       .cls-1 {
         isolation: isolate;
       }
@@ -39,67 +70,210 @@
       }
     </style>
   </defs>
-  <title>question-set</title>
-  <g class="cls-1">
-    <g id="Layer_2" data-name="Layer 2">
-      <g id="question_set_copy" data-name="question set copy">
-        <g>
-          <circle class="cls-2" cx="204" cy="113.5" r="85"/>
-          <g>
-            <g>
-              <g class="cls-3">
-                <rect x="168" y="82.5" width="93" height="85"/>
-              </g>
-              <rect class="cls-4" x="165" y="78.5" width="92" height="86"/>
-            </g>
-            <g>
-              <g class="cls-3">
-                <rect x="162" y="75.5" width="92" height="85"/>
-              </g>
-              <rect class="cls-4" x="157" y="70.5" width="93" height="87"/>
-            </g>
-            <g>
-              <g class="cls-3">
-                <rect x="153" y="67.5" width="92" height="85"/>
-              </g>
-              <rect class="cls-4" x="151" y="63.5" width="91" height="86"/>
-            </g>
-            <g>
-              <g class="cls-5">
-                <rect class="cls-6" x="157" y="95.88" width="82.24" height="12.27" rx="5.44" ry="5.44"/>
-                <rect class="cls-6" x="161.84" y="99.51" width="69.11" height="4.84"/>
-              </g>
-              <g>
-                <rect class="cls-7" x="157" y="94.15" width="82.24" height="12.27" rx="5.44" ry="5.44"/>
-                <rect class="cls-8" x="161.84" y="97.78" width="69.11" height="4.84"/>
-              </g>
-            </g>
-            <g>
-              <g class="cls-5">
-                <rect class="cls-6" x="157" y="113.85" width="82.24" height="12.27" rx="5.44" ry="5.44"/>
-                <rect class="cls-6" x="161.84" y="117.65" width="57.02" height="4.84"/>
-              </g>
-              <g>
-                <rect class="cls-7" x="157" y="112.12" width="82.24" height="12.27" rx="5.44" ry="5.44"/>
-                <rect class="cls-8" x="161.84" y="115.92" width="57.02" height="4.84"/>
-              </g>
-            </g>
-            <g>
-              <g class="cls-5">
-                <rect class="cls-6" x="157" y="131.99" width="82.24" height="12.27" rx="5.44" ry="5.44"/>
-                <rect class="cls-6" x="161.84" y="135.79" width="64.27" height="4.84"/>
-              </g>
-              <g>
-                <rect class="cls-7" x="157" y="130.26" width="82.24" height="12.27" rx="5.44" ry="5.44"/>
-                <rect class="cls-8" x="161.84" y="134.06" width="64.27" height="4.84"/>
-              </g>
-            </g>
-            <circle class="cls-8" cx="197.91" cy="79.04" r="10.98"/>
-            <path class="cls-4" d="M196,82.5V81.07a2.91,2.91,0,0,1,.61-1.36A5.25,5.25,0,0,1,198,78.49a6,6,0,0,0,1.2-1,1.47,1.47,0,0,0,.31-.85.91.91,0,0,0-.37-.8,1.83,1.83,0,0,0-1.08-.28,6.24,6.24,0,0,0-2.78.8l-.88-1.78a7.75,7.75,0,0,1,3.85-1,4.09,4.09,0,0,1,2.66.8,2.63,2.63,0,0,1,1,2.15,2.85,2.85,0,0,1-.41,1.54,5.79,5.79,0,0,1-1.54,1.46,15,15,0,0,0-1.34.88c-.14.2-.56.46-.56.79V82.5Zm.3,2a1.36,1.36,0,0,1,.37-1,1.48,1.48,0,0,1,1.06-.35,1.44,1.44,0,0,1,1,.36,1.58,1.58,0,0,1,0,2,1.42,1.42,0,0,1-1,.37,1.46,1.46,0,0,1-1.06-.36A1.35,1.35,0,0,1,196.3,84.45Z"/>
-          </g>
-        </g>
-        <rect class="cls-9" width="400" height="225"/>
+  <title
+     id="title6">question-set</title>
+  <g
+     id="question_set_copy"
+     data-name="question set copy"
+     style="isolation:isolate">
+    <circle
+       class="cls-2"
+       cx="204"
+       cy="113.5"
+       r="85"
+       id="circle8"
+       style="fill:#aa0000;fill-opacity:1" />
+    <g
+       id="g16">
+      <g
+         class="cls-3"
+         id="g12">
+        <rect
+           x="168"
+           y="82.5"
+           width="93"
+           height="85"
+           id="rect10" />
       </g>
+      <rect
+         class="cls-4"
+         x="165"
+         y="78.5"
+         width="92"
+         height="86"
+         id="rect14" />
     </g>
+    <g
+       id="g24">
+      <g
+         class="cls-3"
+         id="g20">
+        <rect
+           x="162"
+           y="75.5"
+           width="92"
+           height="85"
+           id="rect18" />
+      </g>
+      <rect
+         class="cls-4"
+         x="157"
+         y="70.5"
+         width="93"
+         height="87"
+         id="rect22" />
+    </g>
+    <g
+       id="g32">
+      <g
+         class="cls-3"
+         id="g28">
+        <rect
+           x="153"
+           y="67.5"
+           width="92"
+           height="85"
+           id="rect26" />
+      </g>
+      <rect
+         class="cls-4"
+         x="151"
+         y="63.5"
+         width="91"
+         height="86"
+         id="rect30" />
+    </g>
+    <g
+       class="cls-5"
+       id="g38">
+      <rect
+         class="cls-6"
+         x="157"
+         y="95.879997"
+         width="82.239998"
+         height="12.27"
+         rx="5.4400001"
+         ry="5.4400001"
+         id="rect34" />
+      <rect
+         class="cls-6"
+         x="161.84"
+         y="99.510002"
+         width="69.110001"
+         height="4.8400002"
+         id="rect36" />
+    </g>
+    <rect
+       class="cls-7"
+       x="157"
+       y="94.150002"
+       width="82.239998"
+       height="12.27"
+       rx="5.4400001"
+       ry="5.4400001"
+       id="rect40" />
+    <rect
+       class="cls-8"
+       x="161.84"
+       y="97.779999"
+       width="69.110001"
+       height="4.8400002"
+       id="rect42"
+       style="fill:#aa0000;fill-opacity:1" />
+    <g
+       class="cls-5"
+       id="g52">
+      <rect
+         class="cls-6"
+         x="157"
+         y="113.85"
+         width="82.239998"
+         height="12.27"
+         rx="5.4400001"
+         ry="5.4400001"
+         id="rect48" />
+      <rect
+         class="cls-6"
+         x="161.84"
+         y="117.65"
+         width="57.02"
+         height="4.8400002"
+         id="rect50" />
+    </g>
+    <rect
+       class="cls-7"
+       x="157"
+       y="112.12"
+       width="82.239998"
+       height="12.27"
+       rx="5.4400001"
+       ry="5.4400001"
+       id="rect54" />
+    <rect
+       class="cls-8"
+       x="161.84"
+       y="115.92"
+       width="57.02"
+       height="4.8400002"
+       id="rect56"
+       style="fill:#aa0000;fill-opacity:1" />
+    <g
+       class="cls-5"
+       id="g66">
+      <rect
+         class="cls-6"
+         x="157"
+         y="131.99001"
+         width="82.239998"
+         height="12.27"
+         rx="5.4400001"
+         ry="5.4400001"
+         id="rect62" />
+      <rect
+         class="cls-6"
+         x="161.84"
+         y="135.78999"
+         width="64.269997"
+         height="4.8400002"
+         id="rect64" />
+    </g>
+    <g
+       id="g72">
+      <rect
+         class="cls-7"
+         x="157"
+         y="130.25999"
+         width="82.239998"
+         height="12.27"
+         rx="5.4400001"
+         ry="5.4400001"
+         id="rect68" />
+      <rect
+         class="cls-8"
+         x="161.84"
+         y="134.06"
+         width="64.269997"
+         height="4.8400002"
+         id="rect70"
+         style="fill:#aa0000;fill-opacity:1" />
+    </g>
+    <circle
+       class="cls-8"
+       cx="197.91"
+       cy="79.040001"
+       r="10.98"
+       id="circle76"
+       style="fill:#aa0000;fill-opacity:1" />
+    <path
+       class="cls-4"
+       d="m 196,82.5 v -1.43 a 2.91,2.91 0 0 1 0.61,-1.36 5.25,5.25 0 0 1 1.39,-1.22 6,6 0 0 0 1.2,-1 1.47,1.47 0 0 0 0.31,-0.85 0.91,0.91 0 0 0 -0.37,-0.8 1.83,1.83 0 0 0 -1.08,-0.28 6.24,6.24 0 0 0 -2.78,0.8 l -0.88,-1.78 a 7.75,7.75 0 0 1 3.85,-1 4.09,4.09 0 0 1 2.66,0.8 2.63,2.63 0 0 1 1,2.15 2.85,2.85 0 0 1 -0.41,1.54 5.79,5.79 0 0 1 -1.54,1.46 15,15 0 0 0 -1.34,0.88 c -0.14,0.2 -0.56,0.46 -0.56,0.79 v 1.3 z m 0.3,2 a 1.36,1.36 0 0 1 0.37,-1 1.48,1.48 0 0 1 1.06,-0.35 1.44,1.44 0 0 1 1,0.36 1.58,1.58 0 0 1 0,2 1.42,1.42 0 0 1 -1,0.37 1.46,1.46 0 0 1 -1.06,-0.36 1.35,1.35 0 0 1 -0.37,-1.07 z"
+       id="path78" />
+    <rect
+       class="cls-9"
+       width="400"
+       height="225"
+       id="rect84"
+       x="0"
+       y="0" />
   </g>
 </svg>
