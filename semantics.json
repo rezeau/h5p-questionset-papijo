@@ -1,4 +1,9 @@
-[
+[{
+    "name": "info",
+    "type": "boolean",
+    "label": "Tutorial and Examples: <a href=\"http://www.h5p.rezeau.org\" target=\"_blank\" rel=\"noopener\">Papi Jo's H5P site</a></span>",
+    "description": "<span style=\"color: white;margin-top: -20px;display: table-caption;font-size: large;\">&#9608;</span>"
+  },
   {
     "name": "introPage",
     "type": "group",
@@ -108,10 +113,6 @@
       {
         "name": "VerticalTabs",
         "label": "Default"
-      },
-      {
-        "name": "QuestionSetTextualEditor",
-        "label": "Textual"
       }
     ],
     "min": 1,
@@ -123,6 +124,7 @@
       "importance": "high",
       "description": "Library for this question.",
       "options": [
+        "H5P.Blanks 1.14",
         "H5P.DragQuestionPapiJo 1.14",
         "H5P.DragTextPapiJo 1.0",
         "H5P.Essay 1.5",
