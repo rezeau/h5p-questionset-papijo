@@ -1,0 +1,7 @@
+{
+  "name": "h5p-questionset-papijo-contracts",
+  "private": true,
+  "scripts": {
+    "test": "node --test"
+  }
+}
