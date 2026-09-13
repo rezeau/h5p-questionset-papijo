@@ -5,7 +5,6 @@ const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const path = require('node:path');
 const vm = require('node:vm');
-const { execFileSync } = require('node:child_process');
 
 const root = path.resolve(__dirname, '..');
 
@@ -34,22 +33,25 @@ const getQuestionLibraryWhitelist = () => {
   return questions.field.options;
 };
 
-test('library manifest identifies QuestionSetPapiJo 1.21.4', () => {
+test('library manifest identifies QuestionSetPapiJo 1.22.0', () => {
   const library = readJson('library.json');
 
   assert.equal(library.machineName, 'H5P.QuestionSetPapiJo');
   assert.deepEqual(
     [library.majorVersion, library.minorVersion, library.patchVersion],
-    [1, 21, 4]
+    [1, 22, 0]
   );
 });
 
-test('question-library whitelist retains the complete 1.21.4 baseline', () => {
+test('question-library whitelist changes only DragTextPapiJo 1.2 to 1.3', () => {
   const options = getQuestionLibraryWhitelist();
+  const expected = BASELINE_QUESTION_LIBRARY_WHITELIST.map((option) =>
+    option === 'H5P.DragTextPapiJo 1.2' ? 'H5P.DragTextPapiJo 1.3' : option
+  );
 
-  assert.deepEqual(options, BASELINE_QUESTION_LIBRARY_WHITELIST);
-  assert.equal(options.includes('H5P.DragTextPapiJo 1.2'), true);
-  assert.equal(options.includes('H5P.DragTextPapiJo 1.3'), false);
+  assert.deepEqual(options, expected);
+  assert.equal(options.includes('H5P.DragTextPapiJo 1.3'), true);
+  assert.equal(options.includes('H5P.DragTextPapiJo 1.2'), false);
 });
 
 const h5pCoreCandidates = [
@@ -67,22 +69,22 @@ const h5pCorePath = h5pCoreCandidates.find((candidate) =>
 );
 const dragTextRepoPath = dragTextRepoCandidates.find((candidate) =>
   fs.existsSync(path.join(candidate, 'library.json')) &&
-  fs.existsSync(path.join(candidate, '.git'))
+  fs.existsSync(path.join(candidate, 'semantics.json'))
 );
 
 test(
-  'real H5P upgrade recursively moves the released DragTextPapiJo 1.1 baseline to 1.2',
+  'real H5P upgrade recursively moves DragTextPapiJo 1.2 to 1.3 under QuestionSetPapiJo 1.22',
   {
     skip: !h5pCorePath || !dragTextRepoPath ?
       'H5P core upgrade scripts or the DragTextPapiJo repository are unavailable' : false
   },
   async () => {
     const fixture = {
-      library: 'H5P.QuestionSetPapiJo 1.20',
+      library: 'H5P.QuestionSetPapiJo 1.21',
       params: {
         questions: [
           {
-            library: 'H5P.DragTextPapiJo 1.1',
+            library: 'H5P.DragTextPapiJo 1.2',
             params: {
               taskDescription: 'QuestionSetPapiJo recursive-upgrade baseline',
               textField: 'A *preserved::Text tooltip* value.',
@@ -110,25 +112,24 @@ test(
     }
 
     const questionSetSemantics = readJson('semantics.json');
-    const normalizedDragTextRepoPath = dragTextRepoPath.replace(/\\/g, '/');
-    const dragTextSemantics = JSON.parse(execFileSync(
-      'git',
-      [
-        '-c',
-        `safe.directory=${normalizedDragTextRepoPath}`,
-        '-C',
-        dragTextRepoPath,
-        'show',
-        'v1.2.0:semantics.json'
-      ],
-      { encoding: 'utf8' }
+    const dragTextLibrary = JSON.parse(fs.readFileSync(
+      path.join(dragTextRepoPath, 'library.json'),
+      'utf8'
     ));
+    const dragTextSemantics = JSON.parse(fs.readFileSync(
+      path.join(dragTextRepoPath, 'semantics.json'),
+      'utf8'
+    ));
+    assert.deepEqual(
+      [dragTextLibrary.machineName, dragTextLibrary.majorVersion, dragTextLibrary.minorVersion],
+      ['H5P.DragTextPapiJo', 1, 3]
+    );
     const libraries = new Map([
-      ['H5P.QuestionSetPapiJo 1.21', {
+      ['H5P.QuestionSetPapiJo 1.22', {
         name: 'H5P.QuestionSetPapiJo',
         semantics: questionSetSemantics
       }],
-      ['H5P.DragTextPapiJo 1.2', {
+      ['H5P.DragTextPapiJo 1.3', {
         name: 'H5P.DragTextPapiJo',
         semantics: dragTextSemantics
       }]
@@ -144,8 +145,8 @@ test(
     const result = await new Promise((resolve, reject) => {
       new context.H5P.ContentUpgradeProcess(
         'H5P.QuestionSetPapiJo',
-        new context.H5P.Version('1.20'),
         new context.H5P.Version('1.21'),
+        new context.H5P.Version('1.22'),
         JSON.stringify({ params: fixture.params, metadata: {} }),
         'questionset-baseline',
         loadLibrary,
@@ -154,7 +155,7 @@ test(
     });
 
     assert.deepEqual(fixture, before);
-    assert.equal(result.params.questions[0].library, 'H5P.DragTextPapiJo 1.2');
+    assert.equal(result.params.questions[0].library, 'H5P.DragTextPapiJo 1.3');
     assert.deepEqual(result.params.questions[0].params, childParamsBefore);
     assert.equal(
       result.params.questions[0].subContentId,
