@@ -514,9 +514,11 @@ H5P.QuestionSetPapiJo = function (options, contentId, contentData) {
     }
 
     // Mark all tasks as unanswered:
-    $('.h5p-progress-dot').each(function (idx) {
-      toggleAnsweredDot(idx, false);
-    });
+    if (this.nav && this.nav.progressDots) {
+      $('.h5p-progress-dot', this.nav.progressDots).each(function (idx) {
+        toggleAnsweredDot(idx, false);
+      });
+    }
 
     //Force the last page to be reRendered
     rendered = false;
