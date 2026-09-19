@@ -33,13 +33,13 @@ const getQuestionLibraryWhitelist = () => {
   return questions.field.options;
 };
 
-test('library manifest identifies QuestionSetPapiJo 1.22.1', () => {
+test('library manifest identifies QuestionSetPapiJo 1.22.2', () => {
   const library = readJson('library.json');
 
   assert.equal(library.machineName, 'H5P.QuestionSetPapiJo');
   assert.deepEqual(
     [library.majorVersion, library.minorVersion, library.patchVersion],
-    [1, 22, 1]
+    [1, 22, 2]
   );
 });
 
