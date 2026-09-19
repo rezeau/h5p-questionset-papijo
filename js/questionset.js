@@ -333,10 +333,10 @@ H5P.QuestionSetPapiJo = function (options, contentId, contentData) {
 
   let nav;
   const navigationTexts = {
-    previousButton: params.texts.previous,
-    previousButtonAria: params.texts.previousbutton,
-    nextButton: params.texts.next,
-    nextButtonAria: params.texts.nextbutton,
+    previousButton: params.texts.prevButton,
+    previousButtonAria: params.texts.prevButton,
+    nextButton: params.texts.nextButton,
+    nextButtonAria: params.texts.nextButton,
     lastButton: (self.isSubmitting) ? params.texts.submitButton : params.texts.finishButton,
     jumpToQuestion: params.texts.jumpToQuestion,
     answeredText: params.texts.answeredText,

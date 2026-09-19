@@ -1,6 +1,10 @@
 {
   "semantics": [
     {
+      "label": "Tutoriels et exemples : <a href=\"http://www.h5p.rezeau.org\" target=\"_blank\" rel=\"noopener\">Site H5P de Papi Jo</a></span>",
+      "description": "<span style=\"color: white;margin-top: -20px;display: table-caption;font-size: large;\">&#9608;</span>"
+    },
+    {
       "label": "Introduction du Quiz",
       "fields": [
         {
