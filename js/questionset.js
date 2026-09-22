@@ -227,6 +227,13 @@ H5P.QuestionSetPapiJo = function (options, contentId, contentData) {
       if (override) {
         // Extend subcontent with the overrided settings.
         $.extend(question.params.behaviour, override);
+
+        // ScaleQuestion's explicit autoCheck setting takes precedence over
+        // the legacy enableCheckButton setting used by QuestionSet.
+        if (params.override.checkButton === false &&
+            question.library.split(' ')[0] === 'H5P.ScaleQuestion') {
+          question.params.behaviour.autoCheck = true;
+        }
       }
 
       question.params = question.params || {};

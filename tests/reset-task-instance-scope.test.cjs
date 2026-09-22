@@ -44,8 +44,9 @@ const descendants = (element) => element.children.flatMap((child) => [
 const hasClass = (element, className) =>
   element.className.split(/\s+/).includes(className);
 
-const createHarness = () => {
+const createHarness = ({ runnableFactory } = {}) => {
   const globalDots = [];
+  const runnables = [];
 
   class JQueryCollection {
     constructor(elements) {
@@ -109,6 +110,11 @@ const createHarness = () => {
   }
 
   $.extend = (deep, target, ...sources) => {
+    if (typeof deep !== 'boolean') {
+      sources = [target, ...sources];
+      target = deep;
+      deep = false;
+    }
     for (const source of sources) {
       for (const [key, value] of Object.entries(source || {})) {
         if (deep && value && typeof value === 'object' && !Array.isArray(value)) {
@@ -136,9 +142,12 @@ const createHarness = () => {
     EventDispatcher,
     Components: {
       CoverPage: () => new FakeElement('h5p-theme-quiz'),
-      Navigation: ({ dots = [] }) => {
+      Navigation: ({ dots = [], navigationLength = dots.length }) => {
         const nav = new FakeElement('qs-footer');
-        const localDots = dots.map(() => new FakeElement('h5p-progress-dot answered'));
+        const localDots = Array.from(
+          { length: navigationLength },
+          () => new FakeElement('h5p-progress-dot answered')
+        );
         const progressDots = new FakeElement('h5p-progress-dots');
         localDots.forEach((dot) => {
           progressDots.appendChild(dot);
@@ -160,13 +169,21 @@ const createHarness = () => {
     createUUID: (() => { let id = 0; return () => `uuid-${++id}`; })(),
     isEmpty: (value) => !value || Object.keys(value).length === 0,
     on: () => {},
-    newRunnable: () => ({
-      on: () => {},
-      attach: () => {},
-      resetTask: () => {},
-      getAnswerGiven: () => false,
-      setActivityStarted: () => {}
-    }),
+    newRunnable: (question) => {
+      const runnable = runnableFactory ? runnableFactory(question) : {
+        on: () => {},
+        attach: () => {},
+        resetTask: () => {},
+        getAnswerGiven: () => false,
+        getScore: () => 0,
+        getMaxScore: () => 1,
+        getCurrentState: () => ({}),
+        setActivityStarted: () => {},
+        trigger: () => {}
+      };
+      runnables.push({ question, runnable });
+      return runnable;
+    },
     error: () => {},
     shuffleArray: (value) => value
   };
@@ -178,7 +195,7 @@ const createHarness = () => {
     { filename: 'questionset.js' }
   );
 
-  return { H5P, FakeElement };
+  return { H5P, FakeElement, runnables };
 };
 
 test('resetTask clears only the progress dots owned by its QuestionSet instance', () => {
@@ -205,4 +222,158 @@ test('resetTask clears only the progress dots owned by its QuestionSet instance'
   assert.doesNotThrow(() => first.resetTask());
   assert.deepEqual(first.nav.progressDots.calls, [[0, false], [1, false]]);
   assert.deepEqual(second.nav.progressDots.calls, []);
+});
+
+test('ScaleQuestion keeps authored autoCheck when the global Check override is inactive', () => {
+  [undefined, true].forEach((checkButton) => {
+    [false, true].forEach((autoCheck) => {
+      const { H5P, runnables } = createHarness();
+      const authoredQuestion = {
+        library: 'H5P.ScaleQuestion 0.1',
+        params: { behaviour: { autoCheck } }
+      };
+      const override = checkButton === undefined ? {} : { checkButton };
+
+      new H5P.QuestionSetPapiJo({
+        questions: [authoredQuestion],
+        override
+      }, 1, {});
+
+      assert.equal(runnables[0].question.params.behaviour.autoCheck, autoCheck);
+      assert.equal(
+        Object.hasOwn(runnables[0].question.params.behaviour, 'enableCheckButton'),
+        false
+      );
+      assert.equal(authoredQuestion.params.behaviour.autoCheck, autoCheck);
+    });
+  });
+});
+
+test('disabled global Check enables ScaleQuestion autoCheck before initialization', () => {
+  const { H5P, runnables } = createHarness();
+  const authoredQuestion = {
+    library: 'H5P.ScaleQuestion 0.1',
+    params: { behaviour: { autoCheck: false } }
+  };
+
+  new H5P.QuestionSetPapiJo({
+    questions: [authoredQuestion],
+    override: { checkButton: false }
+  }, 1, {});
+
+  assert.deepEqual(runnables[0].question.params.behaviour, {
+    autoCheck: true,
+    enableCheckButton: false
+  });
+  assert.deepEqual(authoredQuestion.params.behaviour, { autoCheck: false });
+});
+
+test('ScaleQuestion-specific Check translation preserves other child and button overrides', () => {
+  const { H5P, runnables } = createHarness();
+
+  new H5P.QuestionSetPapiJo({
+    questions: [
+      {
+        library: 'H5P.ScaleQuestion 0.1',
+        params: { behaviour: { autoCheck: false } }
+      },
+      {
+        library: 'H5P.MultiChoice 1.16',
+        params: { behaviour: {} }
+      }
+    ],
+    override: {
+      checkButton: false,
+      retryButton: 'off',
+      showSolutionButton: 'on'
+    }
+  }, 1, {});
+
+  assert.deepEqual(runnables[0].question.params.behaviour, {
+    autoCheck: true,
+    enableCheckButton: false,
+    enableRetry: false,
+    enableSolutionsButton: true
+  });
+  assert.deepEqual(runnables[1].question.params.behaviour, {
+    enableCheckButton: false,
+    enableRetry: false,
+    enableSolutionsButton: true
+  });
+  assert.equal(
+    Object.hasOwn(runnables[1].question.params.behaviour, 'autoCheck'),
+    false
+  );
+});
+
+test('intermediate ScaleQuestion state keeps restricted forward navigation locked', () => {
+  const listeners = new Map();
+  const children = [];
+  const { H5P, FakeElement } = createHarness({
+    runnableFactory: () => {
+      const child = {
+        terminal: false,
+        on: (event, callback) => listeners.set(child, { event, callback }),
+        attach: () => {},
+        resetTask: () => {},
+        getAnswerGiven: () => child.terminal,
+        getScore: () => 0,
+        getMaxScore: () => 1,
+        getCurrentState: () => ({ terminal: child.terminal }),
+        setActivityStarted: () => {},
+        trigger: () => {}
+      };
+      children.push(child);
+      return child;
+    }
+  });
+  const questionSet = new H5P.QuestionSetPapiJo({
+    disableBackwardsNavigation: true,
+    questions: [
+      { library: 'H5P.ScaleQuestion 0.1', params: { behaviour: {} } },
+      { library: 'H5P.MultiChoice 1.16', params: { behaviour: {} } }
+    ]
+  }, 1, {});
+  const host = new FakeElement('host');
+  new FakeElement('parent').appendChild(host);
+  questionSet.attach(host);
+
+  assert.equal(questionSet.buttons.next.disabled, true);
+  const registration = listeners.get(children[0]);
+  assert.equal(registration.event, 'xAPI');
+  registration.callback({
+    getVerb: () => 'interacted',
+    data: { statement: { context: {} } }
+  });
+  assert.equal(children[0].getAnswerGiven(), false);
+  assert.equal(questionSet.buttons.next.disabled, true);
+});
+
+test('terminal ScaleQuestion scores contribute to the QuestionSet aggregate', () => {
+  const scores = [1, 0];
+  const { H5P } = createHarness({
+    runnableFactory: () => {
+      const score = scores.shift();
+      return {
+        on: () => {},
+        attach: () => {},
+        resetTask: () => {},
+        getAnswerGiven: () => true,
+        getScore: () => score,
+        getMaxScore: () => 1,
+        getCurrentState: () => ({ terminal: true }),
+        setActivityStarted: () => {},
+        trigger: () => {}
+      };
+    }
+  });
+  const questionSet = new H5P.QuestionSetPapiJo({
+    questions: [
+      { library: 'H5P.ScaleQuestion 0.1', params: { behaviour: {} } },
+      { library: 'H5P.ScaleQuestion 0.1', params: { behaviour: {} } }
+    ]
+  }, 1, {});
+
+  assert.equal(questionSet.getScore(), 1);
+  assert.equal(questionSet.getMaxScore(), 2);
 });

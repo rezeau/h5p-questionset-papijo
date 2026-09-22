@@ -132,7 +132,8 @@
         "H5P.MarkTheWordsPapiJo 1.2",
         "H5P.MultiChoice 1.16",
         "H5P.MultiMediaChoicePapiJo 0.4",
-        "H5P.TrueFalse 1.8"
+        "H5P.TrueFalse 1.8",
+        "H5P.ScaleQuestion 0.1"
       ]
     }
   },

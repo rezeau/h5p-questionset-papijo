@@ -33,25 +33,34 @@ const getQuestionLibraryWhitelist = () => {
   return questions.field.options;
 };
 
-test('library manifest identifies QuestionSetPapiJo 1.22.2', () => {
+test('library manifest identifies QuestionSetPapiJo 1.22.3', () => {
   const library = readJson('library.json');
 
   assert.equal(library.machineName, 'H5P.QuestionSetPapiJo');
   assert.deepEqual(
     [library.majorVersion, library.minorVersion, library.patchVersion],
-    [1, 22, 2]
+    [1, 22, 3]
   );
 });
 
-test('question-library whitelist changes only DragTextPapiJo 1.2 to 1.3', () => {
+test('question-library whitelist adds only ScaleQuestion 0.1 and preserves version 1.22.3', () => {
   const options = getQuestionLibraryWhitelist();
-  const expected = BASELINE_QUESTION_LIBRARY_WHITELIST.map((option) =>
-    option === 'H5P.DragTextPapiJo 1.2' ? 'H5P.DragTextPapiJo 1.3' : option
-  );
+  const expected = [
+    ...BASELINE_QUESTION_LIBRARY_WHITELIST.map((option) =>
+      option === 'H5P.DragTextPapiJo 1.2' ? 'H5P.DragTextPapiJo 1.3' : option
+    ),
+    'H5P.ScaleQuestion 0.1'
+  ];
+  const library = readJson('library.json');
 
   assert.deepEqual(options, expected);
+  assert.equal(options.includes('H5P.ScaleQuestion 0.1'), true);
   assert.equal(options.includes('H5P.DragTextPapiJo 1.3'), true);
   assert.equal(options.includes('H5P.DragTextPapiJo 1.2'), false);
+  assert.deepEqual(
+    [library.majorVersion, library.minorVersion, library.patchVersion],
+    [1, 22, 3]
+  );
 });
 
 const h5pCoreCandidates = [
