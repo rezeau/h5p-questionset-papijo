@@ -229,7 +229,7 @@ test('ScaleQuestion keeps authored autoCheck when the global Check override is i
     [false, true].forEach((autoCheck) => {
       const { H5P, runnables } = createHarness();
       const authoredQuestion = {
-        library: 'H5P.ScaleQuestion 0.1',
+        library: 'H5P.ScaleQuestion 0.2',
         params: { behaviour: { autoCheck } }
       };
       const override = checkButton === undefined ? {} : { checkButton };
@@ -252,7 +252,7 @@ test('ScaleQuestion keeps authored autoCheck when the global Check override is i
 test('disabled global Check enables ScaleQuestion autoCheck before initialization', () => {
   const { H5P, runnables } = createHarness();
   const authoredQuestion = {
-    library: 'H5P.ScaleQuestion 0.1',
+    library: 'H5P.ScaleQuestion 0.2',
     params: { behaviour: { autoCheck: false } }
   };
 
@@ -274,7 +274,7 @@ test('ScaleQuestion-specific Check translation preserves other child and button 
   new H5P.QuestionSetPapiJo({
     questions: [
       {
-        library: 'H5P.ScaleQuestion 0.1',
+        library: 'H5P.ScaleQuestion 0.2',
         params: { behaviour: { autoCheck: false } }
       },
       {
@@ -330,7 +330,7 @@ test('intermediate ScaleQuestion state keeps restricted forward navigation locke
   const questionSet = new H5P.QuestionSetPapiJo({
     disableBackwardsNavigation: true,
     questions: [
-      { library: 'H5P.ScaleQuestion 0.1', params: { behaviour: {} } },
+      { library: 'H5P.ScaleQuestion 0.2', params: { behaviour: {} } },
       { library: 'H5P.MultiChoice 1.16', params: { behaviour: {} } }
     ]
   }, 1, {});
@@ -369,8 +369,8 @@ test('terminal ScaleQuestion scores contribute to the QuestionSet aggregate', ()
   });
   const questionSet = new H5P.QuestionSetPapiJo({
     questions: [
-      { library: 'H5P.ScaleQuestion 0.1', params: { behaviour: {} } },
-      { library: 'H5P.ScaleQuestion 0.1', params: { behaviour: {} } }
+      { library: 'H5P.ScaleQuestion 0.2', params: { behaviour: {} } },
+      { library: 'H5P.ScaleQuestion 0.2', params: { behaviour: {} } }
     ]
   }, 1, {});
 
